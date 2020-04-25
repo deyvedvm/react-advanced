@@ -1,22 +1,27 @@
-import React, {Component, Fragment} from "react";
+import React, { Fragment, useState } from 'react';
 
-class Counter extends Component {
-    state = {count: 0};
+import useDocumentTitle from './useDocumentTitle';
 
-    increaseCount = () => {
-        this.setState({count: this.state.count + 1})
-    };
+function Counter() {
+    const [count, setCount] = useState(0);
+    const [name, setName] = useState('');
 
-    render() {
-        return (
-            <Fragment>
-                <div>
-                    Count: {this.state.count}
-                </div>
-                <button onClick={this.increaseCount}>Increase</button>
-            </Fragment>
-        );
-    }
+    useDocumentTitle(`${name} has clicked ${count} times!`);
+
+    return (
+        <Fragment>
+            <input type='text' onChange={e => setName(e.target.value)} />
+            <div>
+                {name} has clicked {count} time!
+            </div>
+            <button
+                onClick={() => {
+                    setCount(count + 1);
+                }}>
+                Increase
+            </button>
+        </Fragment>
+    );
 }
 
 export default Counter;

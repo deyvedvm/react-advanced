@@ -1,21 +1,34 @@
 import React from "react";
 
 function withTooltip(Component) {
-  return class WithTooltip extends React.Component {
-    state = { showTooltip: false };
 
-    mouseOver = () => this.setState({ showTooltip: true });
+    return class WithTooltip extends React.Component {
+        state = {
+            showToolTip: false
+        };
 
-    mouseOut = () => this.setState({ showTooltip: false });
+        mouseOver = () => {
+            this.setState({
+                showToolTip: true
+            });
+        };
 
-    render() {
-      return (
-        <div onMouseOver={this.mouseOver} onMouseOut={this.mouseOut}>
-          <Component {...this.props} showTooltip={this.state.showTooltip} />
-        </div>
-      );
-    }
-  };
+        mouseOut = () => {
+            this.setState({
+                showToolTip: false
+            });
+        };
+
+        render() {
+            return (
+                <div onMouseOver={this.mouseOver} onMouseOut={this.mouseOut}>
+                    <Component
+                        {...this.props}
+                        showToolTip={this.state.showToolTip}/>
+                </div>
+            );
+        }
+    };
 }
 
 export default withTooltip;
